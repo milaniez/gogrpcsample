@@ -1,0 +1,36 @@
+syntax = "proto3";
+option go_package = "gRPCTest001/hashtable";
+package hashtable;
+
+service HashTable {
+  rpc Add(KeyVal) returns (Code) {}
+  rpc Del(Key) returns (Code) {}
+  rpc Get(Key) returns (Val) {}
+  rpc Dump(Empty) returns (stream KeyVal) {}
+}
+
+message Empty {
+}
+
+message Code {
+  enum StatusCode {
+    STATUS_CODE_OK = 0;
+    STATUS_CODE_ER_DUP = 1;
+    STATUS_CODE_ER_NO_KEY = 2;
+  }
+  StatusCode code = 1;
+}
+
+message Key {
+  string key = 1;
+}
+
+message Val {
+  Code code = 1;
+  string val = 2;
+}
+
+message KeyVal {
+  string key = 1;
+  string val = 2;
+}
