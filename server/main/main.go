@@ -7,17 +7,16 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"io/ioutil"
-	"log"
-	"net"
-	"strings"
-	"sync"
-
 	hspb "github.com/milaniez/gogrpcsample/hashtable"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/reflection"
+	"io/ioutil"
+	"log"
+	"net"
+	"strings"
+	"sync"
 )
 
 type ServiceMethodType int
@@ -239,10 +238,26 @@ func (s *HashTableServerImpl) Dump(_ *hspb.Empty, stream hspb.HashTable_DumpServ
 
 func main() {
 	var (
-		certFile = flag.String("cert", "/home/mehdi/mzzcerts/localcerts/server.crt", "Server certificate public key file")
-		keyFile  = flag.String("key", "/home/mehdi/mzzcerts/localcerts/server.key", "Server certificate secret key file")
-		caDir    = flag.String("cadir", "/home/mehdi/mzzcerts/cacerts/", "Certificate Authority directory")
-		addr     = flag.String("address", "localhost:8443", "Server address")
+		certFile = flag.String(
+			"cert",
+			"/home/mehdi/mzzcerts/localcerts/server.crt",
+			"Server certificate public key file",
+		)
+		keyFile  = flag.String(
+			"key",
+			"/home/mehdi/mzzcerts/localkeys/server.key",
+			"Server certificate secret key file",
+		)
+		caDir    = flag.String(
+			"cadir",
+			"/home/mehdi/mzzcerts/cacerts/",
+			"Certificate Authority directory",
+		)
+		addr     = flag.String(
+			"address",
+			"localhost:8443",
+			"Server address",
+		)
 	)
 	flag.Parse()
 	if !strings.HasSuffix(*caDir, "/") {
